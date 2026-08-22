@@ -298,7 +298,7 @@ class CsmarinHeader extends HTMLElement {
 
           <!-- 流れるテキストエリア -->
           <div class="csmarin-ticker-container">
-            <div class="csmarin-ticker-text">WOW! 眞凛、全力創作中!</div>
+            <div class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</div>
           </div>
 
           <!-- ドロップダウンメニュー -->
