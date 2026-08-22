@@ -14,266 +14,273 @@ class CsmarinHeader extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         :host {
-          display: block;
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          height: 0;
-          z-index: 99999;
-          box-sizing: border-box;
-          transition: top 0.2s ease;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          all: initial;
+          display: block !important;
+          position: fixed !important;
+          top: 0 !important;
+          right: 0 !important;
+          left: 0 !important;
+          height: 0 !important;
+          z-index: 999999 !important;
+          box-sizing: border-box !important;
+          transition: top 0.2s ease !important;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
         }
 
         .csmarin-header-wrapper {
-          position: absolute;
-          top: 0;
-          right: 0;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          pointer-events: auto;
+          position: absolute !important;
+          top: 0 !important;
+          right: 0 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: flex-end !important;
+          pointer-events: auto !important;
+          box-sizing: border-box !important;
         }
 
         .csmarin-cyan-accent {
-          position: absolute;
-          top: 0;
-          right: 0;
-          height: 48px;
-          width: 460px;
-          background-color: #00bcd4;
-          border-bottom-left-radius: 28px;
-          z-index: 1;
+          position: absolute !important;
+          top: 0 !important;
+          right: 0 !important;
+          height: 48px !important;
+          width: 460px !important;
+          background-color: #00bcd4 !important;
+          border-bottom-left-radius: 28px !important;
+          z-index: 1 !important;
         }
 
         .csmarin-capsule-body {
-          position: relative;
-          z-index: 2;
-          background-color: #ffffff;
-          height: 42px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 0 16px;
-          border-bottom-left-radius: 24px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          position: relative !important;
+          z-index: 2 !important;
+          background-color: #ffffff !important;
+          height: 42px !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 10px !important;
+          padding: 0 14px !important;
+          border-bottom-left-radius: 24px !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+          box-sizing: border-box !important;
         }
 
         .csmarin-gmo-menu-btn {
-          background: none;
-          border: none;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 24px;
-          height: 24px;
-          border-radius: 4px;
-          cursor: pointer;
-          flex-shrink: 0;
-          transition: background-color 0.2s;
+          background: none !important;
+          border: none !important;
+          padding: 0 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 24px !important;
+          height: 24px !important;
+          border-radius: 4px !important;
+          cursor: pointer !important;
+          flex-shrink: 0 !important;
+          transition: background-color 0.2s !important;
         }
 
         .csmarin-gmo-menu-btn:hover {
-          background-color: #f0f0f0;
+          background-color: #f0f0f0 !important;
         }
 
         .csmarin-gmo-menu-btn svg {
-          width: 18px;
-          height: 18px;
-          fill: #00bcd4;
+          width: 18px !important;
+          height: 18px !important;
+          fill: #00bcd4 !important;
+          display: block !important;
         }
 
-        /* --- テロップ枠（強制表示設定） --- */
+        /* テロップ枠（強制サイズ & 表示固定） */
         .csmarin-ticker-container {
-          width: 180px;
-          min-width: 180px;
-          height: 24px;
-          overflow: hidden;
-          position: relative;
-          display: flex;
-          align-items: center;
-          background-color: #f0f0f0;
-          border: 1px solid #e0e0e0;
-          border-radius: 12px;
-          padding: 0 8px;
-          box-sizing: border-box;
-          flex-shrink: 0;
+          width: 180px !important;
+          min-width: 180px !important;
+          max-width: 180px !important;
+          height: 24px !important;
+          overflow: hidden !important;
+          position: relative !important;
+          display: flex !important;
+          align-items: center !important;
+          background-color: #f0f0f0 !important;
+          border: 1px solid #e0e0e0 !important;
+          border-radius: 12px !important;
+          padding: 0 6px !important;
+          box-sizing: border-box !important;
+          flex-shrink: 0 !important;
         }
 
         .csmarin-ticker-text {
-          display: inline-block;
-          white-space: nowrap;
-          font-size: 11px;
-          font-weight: 500;
-          color: #333333;
-          animation: csmarin-scroll-text 12s linear infinite;
+          display: inline-block !important;
+          white-space: nowrap !important;
+          font-size: 11px !important;
+          line-height: 24px !important;
+          font-weight: 500 !important;
+          color: #333333 !important;
+          padding-left: 100% !important;
+          animation: csmarin-scroll-text 12s linear infinite !important;
         }
 
         .csmarin-ticker-container:hover .csmarin-ticker-text {
-          animation-play-state: paused;
+          animation-play-state: paused !important;
         }
 
         @keyframes csmarin-scroll-text {
           0% {
-            transform: translateX(180px);
+            transform: translate3d(0, 0, 0);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translate3d(-100%, 0, 0);
           }
         }
 
         /* ドロップダウンメニュー */
         .csmarin-gmo-dropdown {
-          position: absolute;
-          top: 44px;
-          right: 10px;
-          width: 280px;
-          background-color: #ffffff;
-          border: 1px solid #e0e0e0;
-          border-radius: 12px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-          padding: 16px;
-          z-index: 100000;
-          box-sizing: border-box;
-          text-align: left;
-          overflow: hidden;
-          opacity: 0;
-          visibility: hidden;
-          transform: translateY(-20px) scaleY(0.85);
-          transform-origin: top right;
+          position: absolute !important;
+          top: 44px !important;
+          right: 10px !important;
+          width: 280px !important;
+          background-color: #ffffff !important;
+          border: 1px solid #e0e0e0 !important;
+          border-radius: 12px !important;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+          padding: 16px !important;
+          z-index: 100000 !important;
+          box-sizing: border-box !important;
+          text-align: left !important;
+          overflow: hidden !important;
+          opacity: 0 !important;
+          visibility: hidden !important;
+          transform: translateY(-20px) scaleY(0.85) !important;
+          transform-origin: top right !important;
           transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), 
                       opacity 0.25s ease, 
-                      visibility 0.35s;
+                      visibility 0.35s !important;
         }
 
         .csmarin-gmo-dropdown.is-open {
-          opacity: 1;
-          visibility: visible;
-          transform: translateY(0) scaleY(1);
+          opacity: 1 !important;
+          visibility: visible !important;
+          transform: translateY(0) scaleY(1) !important;
         }
 
         .csmarin-menu-cyan-shape {
-          position: absolute;
-          top: -15px;
-          right: -20px;
-          width: 120px;
-          height: 50px;
-          background-color: #00bcd4;
-          border-bottom-left-radius: 50px;
-          opacity: 0.85;
-          pointer-events: none;
-          z-index: 0;
+          position: absolute !important;
+          top: -15px !important;
+          right: -20px !important;
+          width: 120px !important;
+          height: 50px !important;
+          background-color: #00bcd4 !important;
+          border-bottom-left-radius: 50px !important;
+          opacity: 0.85 !important;
+          pointer-events: none !important;
+          z-index: 0 !important;
         }
 
         .csmarin-dropdown-content {
-          position: relative;
-          z-index: 1;
+          position: relative !important;
+          z-index: 1 !important;
         }
 
         .csmarin-menu-section {
-          margin-bottom: 12px;
-          padding-bottom: 10px;
-          border-bottom: 1px solid #eee;
+          margin-bottom: 12px !important;
+          padding-bottom: 10px !important;
+          border-bottom: 1px solid #eee !important;
         }
 
         .csmarin-menu-section:last-child {
-          margin-bottom: 0;
-          padding-bottom: 0;
-          border-bottom: none;
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+          border-bottom: none !important;
         }
 
         .csmarin-menu-title {
-          font-size: 11px;
-          font-weight: bold;
-          color: #888888;
-          margin-bottom: 6px;
-          text-transform: uppercase;
+          font-size: 11px !important;
+          font-weight: bold !important;
+          color: #888888 !important;
+          margin-bottom: 6px !important;
+          text-transform: uppercase !important;
         }
 
         .csmarin-menu-link {
-          display: block;
-          font-size: 13px;
-          color: #333333;
-          text-decoration: none;
-          padding: 5px 8px;
-          border-radius: 4px;
-          transition: background-color 0.2s, color 0.2s;
+          display: block !important;
+          font-size: 13px !important;
+          color: #333333 !important;
+          text-decoration: none !important;
+          padding: 5px 8px !important;
+          border-radius: 4px !important;
+          transition: background-color 0.2s, color 0.2s !important;
         }
 
         .csmarin-menu-link:hover {
-          background-color: rgba(0, 188, 212, 0.08);
-          color: #00bcd4;
+          background-color: rgba(0, 188, 212, 0.08) !important;
+          color: #00bcd4 !important;
         }
 
         .csmarin-id-section {
-          background-color: #f9f9f9;
-          padding: 10px;
-          border-radius: 6px;
+          background-color: #f9f9f9 !important;
+          padding: 10px !important;
+          border-radius: 6px !important;
         }
 
         .csmarin-id-header {
-          display: flex;
-          align-items: center;
-          margin-bottom: 8px;
+          display: flex !important;
+          align-items: center !important;
+          margin-bottom: 8px !important;
         }
 
         .csmarin-id-logo {
-          height: 20px;
-          width: auto;
-          display: block;
+          height: 20px !important;
+          width: auto !important;
+          display: block !important;
         }
 
         .csmarin-id-buttons {
-          display: flex;
-          gap: 8px;
+          display: flex !important;
+          gap: 8px !important;
         }
 
         .csmarin-id-btn {
-          flex: 1;
-          text-align: center;
-          font-size: 12px;
-          padding: 6px 0;
-          border-radius: 4px;
-          text-decoration: none;
-          font-weight: bold;
-          transition: opacity 0.2s;
+          flex: 1 !important;
+          text-align: center !important;
+          font-size: 12px !important;
+          padding: 6px 0 !important;
+          border-radius: 4px !important;
+          text-decoration: none !important;
+          font-weight: bold !important;
+          transition: opacity 0.2s !important;
         }
 
         .csmarin-id-btn-register {
-          background-color: #00bcd4;
-          color: #ffffff;
+          background-color: #00bcd4 !important;
+          color: #ffffff !important;
         }
 
         .csmarin-id-btn-login {
-          background-color: #e0e0e0;
-          color: #333333;
+          background-color: #e0e0e0 !important;
+          color: #333333 !important;
         }
 
         .csmarin-id-btn:hover {
-          opacity: 0.85;
+          opacity: 0.85 !important;
         }
 
         .csmarin-gmo-logo-link {
-          display: flex;
-          align-items: center;
-          text-decoration: none;
-          flex-shrink: 0;
+          display: flex !important;
+          align-items: center !important;
+          text-decoration: none !important;
+          flex-shrink: 0 !important;
         }
 
         .csmarin-gmo-logo-img {
-          height: 22px;
-          width: auto;
-          display: block;
+          height: 22px !important;
+          width: auto !important;
+          display: block !important;
         }
 
         @media (max-width: 480px) {
           .csmarin-ticker-container {
-            display: none;
+            display: none !important;
           }
           .csmarin-cyan-accent {
-            width: 260px;
+            width: 260px !important;
           }
         }
       </style>
@@ -288,9 +295,8 @@ class CsmarinHeader extends HTMLElement {
             </svg>
           </button>
 
-          <!-- 流れるテキストエリア -->
           <div class="csmarin-ticker-container">
-            <div class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</div>
+            <span class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</span>
           </div>
 
           <div class="csmarin-gmo-dropdown" id="csmarinDropdown">
@@ -367,4 +373,6 @@ class CsmarinHeader extends HTMLElement {
   }
 }
 
-customElements.define('csmarin-header', CsmarinHeader);
+if (!customElements.get('csmarin-header')) {
+  customElements.define('csmarin-header', CsmarinHeader);
+}
