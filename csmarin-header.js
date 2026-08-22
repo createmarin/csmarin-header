@@ -2,8 +2,6 @@ class CsmarinHeader extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    
-    // イベントハンドラのバインド（削除できるように保持）
     this._handleOutsideClick = this._handleOutsideClick.bind(this);
     this._applyAdminBarOffset = this._applyAdminBarOffset.bind(this);
   }
@@ -15,7 +13,6 @@ class CsmarinHeader extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // クリーンアップ
     document.removeEventListener('click', this._handleOutsideClick);
     window.removeEventListener('resize', this._applyAdminBarOffset);
   }
@@ -37,6 +34,10 @@ class CsmarinHeader extends HTMLElement {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
         }
 
+        *, *::before, *::after {
+          box-sizing: border-box !important;
+        }
+
         .csmarin-header-wrapper {
           position: absolute !important;
           top: 0 !important;
@@ -45,7 +46,6 @@ class CsmarinHeader extends HTMLElement {
           align-items: center !important;
           justify-content: flex-end !important;
           pointer-events: auto !important;
-          box-sizing: border-box !important;
         }
 
         .csmarin-cyan-accent {
@@ -70,7 +70,6 @@ class CsmarinHeader extends HTMLElement {
           padding: 0 14px !important;
           border-bottom-left-radius: 24px !important;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-          box-sizing: border-box !important;
         }
 
         .csmarin-gmo-menu-btn {
@@ -99,7 +98,7 @@ class CsmarinHeader extends HTMLElement {
           display: block !important;
         }
 
-        /* テロップ枠 */
+        /* テロップ枠（強制表示 & はみ出し防止） */
         .csmarin-ticker-container {
           width: 180px !important;
           min-width: 180px !important;
@@ -107,13 +106,11 @@ class CsmarinHeader extends HTMLElement {
           height: 24px !important;
           overflow: hidden !important;
           position: relative !important;
-          display: flex !important;
-          align-items: center !important;
+          display: block !important;
           background-color: #f0f0f0 !important;
           border: 1px solid #e0e0e0 !important;
           border-radius: 12px !important;
           padding: 0 6px !important;
-          box-sizing: border-box !important;
           flex-shrink: 0 !important;
         }
 
@@ -121,11 +118,12 @@ class CsmarinHeader extends HTMLElement {
           display: inline-block !important;
           white-space: nowrap !important;
           font-size: 11px !important;
-          line-height: 24px !important;
+          line-height: 22px !important;
           font-weight: 500 !important;
           color: #333333 !important;
           padding-left: 100% !important;
           animation: csmarin-scroll-text 12s linear infinite !important;
+          will-change: transform !important;
         }
 
         .csmarin-ticker-container:hover .csmarin-ticker-text {
@@ -134,10 +132,10 @@ class CsmarinHeader extends HTMLElement {
 
         @keyframes csmarin-scroll-text {
           0% {
-            transform: translate3d(0, 0, 0);
+            transform: translateX(0);
           }
           100% {
-            transform: translate3d(-100%, 0, 0);
+            transform: translateX(-100%);
           }
         }
 
@@ -153,7 +151,6 @@ class CsmarinHeader extends HTMLElement {
           box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
           padding: 16px !important;
           z-index: 100000 !important;
-          box-sizing: border-box !important;
           text-align: left !important;
           overflow: hidden !important;
           opacity: 0 !important;
