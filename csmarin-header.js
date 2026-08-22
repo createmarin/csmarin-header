@@ -85,18 +85,21 @@ class CsmarinHeader extends HTMLElement {
           fill: #00bcd4;
         }
 
-        /* テロップエリア修正（表示確実化） */
+        /* --- テロップ枠（強制表示設定） --- */
         .csmarin-ticker-container {
           width: 180px;
+          min-width: 180px;
           height: 24px;
           overflow: hidden;
           position: relative;
           display: flex;
           align-items: center;
-          background-color: #f5f5f5;
+          background-color: #f0f0f0;
+          border: 1px solid #e0e0e0;
           border-radius: 12px;
           padding: 0 8px;
           box-sizing: border-box;
+          flex-shrink: 0;
         }
 
         .csmarin-ticker-text {
@@ -121,6 +124,7 @@ class CsmarinHeader extends HTMLElement {
           }
         }
 
+        /* ドロップダウンメニュー */
         .csmarin-gmo-dropdown {
           position: absolute;
           top: 44px;
@@ -284,8 +288,9 @@ class CsmarinHeader extends HTMLElement {
             </svg>
           </button>
 
+          <!-- 流れるテキストエリア -->
           <div class="csmarin-ticker-container">
-            <div class="csmarin-ticker-text">&#x3010;&#x304A;&#x3057;&#x3089;&#x305B;&#x3011;&#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30B9;&#x30BF;&#x30B8;&#x30AA;&#x771E;&#x100C;&#x100D; &#x516C;&#x5F0F;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x66F4;&#x65B0;&#x4E2D;&#xFF01;</div>
+            <div class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</div>
           </div>
 
           <div class="csmarin-gmo-dropdown" id="csmarinDropdown">
