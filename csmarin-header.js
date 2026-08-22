@@ -26,7 +26,6 @@ class CsmarinHeader extends HTMLElement {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* 右上固定のコンテナ */
         .csmarin-header-wrapper {
           position: absolute;
           top: 0;
@@ -37,19 +36,17 @@ class CsmarinHeader extends HTMLElement {
           pointer-events: auto;
         }
 
-        /* 水色のアクセントライン（背面に配置） */
         .csmarin-cyan-accent {
           position: absolute;
           top: 0;
           right: 0;
           height: 48px;
-          width: 460px; /* テロップ追加に伴い背面幅を拡張 */
+          width: 460px;
           background-color: #00bcd4;
           border-bottom-left-radius: 28px;
           z-index: 1;
         }
 
-        /* 白色カプセル本体 */
         .csmarin-capsule-body {
           position: relative;
           z-index: 2;
@@ -58,12 +55,11 @@ class CsmarinHeader extends HTMLElement {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 0 16px 0 16px;
+          padding: 0 16px;
           border-bottom-left-radius: 24px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        /* 9つの点ボタン */
         .csmarin-gmo-menu-btn {
           background: none;
           border: none;
@@ -89,9 +85,9 @@ class CsmarinHeader extends HTMLElement {
           fill: #00bcd4;
         }
 
-        /* --- 流れるテキスト（テロップ）エリア --- */
+        /* テロップエリア修正（表示確実化） */
         .csmarin-ticker-container {
-          width: 180px; /* 流れる文字を見せる表示幅（お好みで調整可） */
+          width: 180px;
           height: 24px;
           overflow: hidden;
           position: relative;
@@ -109,24 +105,22 @@ class CsmarinHeader extends HTMLElement {
           font-size: 11px;
           font-weight: 500;
           color: #333333;
-          padding-left: 100%; /* 初期位置：右端の外側 */
-          animation: csmarin-scroll-text 15s linear infinite; /* 速度は15sで調整 */
+          animation: csmarin-scroll-text 12s linear infinite;
         }
 
         .csmarin-ticker-container:hover .csmarin-ticker-text {
-          animation-play-state: paused; /* ホバーで一時停止 */
+          animation-play-state: paused;
         }
 
         @keyframes csmarin-scroll-text {
           0% {
-            transform: translateX(0);
+            transform: translateX(180px);
           }
           100% {
             transform: translateX(-100%);
           }
         }
 
-        /* --- ドロップダウンパネル（にゅっアニメーション仕様） --- */
         .csmarin-gmo-dropdown {
           position: absolute;
           top: 44px;
@@ -141,8 +135,6 @@ class CsmarinHeader extends HTMLElement {
           box-sizing: border-box;
           text-align: left;
           overflow: hidden;
-
-          /* 初期状態 */
           opacity: 0;
           visibility: hidden;
           transform: translateY(-20px) scaleY(0.85);
@@ -158,7 +150,6 @@ class CsmarinHeader extends HTMLElement {
           transform: translateY(0) scaleY(1);
         }
 
-        /* メニュー内の水色アクセント図形（右上） */
         .csmarin-menu-cyan-shape {
           position: absolute;
           top: -15px;
@@ -212,7 +203,6 @@ class CsmarinHeader extends HTMLElement {
           color: #00bcd4;
         }
 
-        /* CSM-IDエリア */
         .csmarin-id-section {
           background-color: #f9f9f9;
           padding: 10px;
@@ -261,7 +251,6 @@ class CsmarinHeader extends HTMLElement {
           opacity: 0.85;
         }
 
-        /* ロゴ画像 */
         .csmarin-gmo-logo-link {
           display: flex;
           align-items: center;
@@ -275,7 +264,6 @@ class CsmarinHeader extends HTMLElement {
           display: block;
         }
 
-        /* モバイル対応（画面幅が狭いときはテロップを隠してカプセル幅を詰める） */
         @media (max-width: 480px) {
           .csmarin-ticker-container {
             display: none;
@@ -296,12 +284,10 @@ class CsmarinHeader extends HTMLElement {
             </svg>
           </button>
 
-          <!-- 流れるテキストエリア -->
           <div class="csmarin-ticker-container">
-            <div class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</div>
+            <div class="csmarin-ticker-text">&#x3010;&#x304A;&#x3057;&#x3089;&#x305B;&#x3011;&#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30B9;&#x30BF;&#x30B8;&#x30AA;&#x771E;&#x100C;&#x100D; &#x516C;&#x5F0F;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x66F4;&#x65B0;&#x4E2D;&#xFF01;</div>
           </div>
 
-          <!-- ドロップダウンメニュー -->
           <div class="csmarin-gmo-dropdown" id="csmarinDropdown">
             <div class="csmarin-menu-cyan-shape"></div>
 
@@ -331,7 +317,6 @@ class CsmarinHeader extends HTMLElement {
             </div>
           </div>
 
-          <!-- ロゴ画像 -->
           <a href="https://csmarin.com" class="csmarin-gmo-logo-link" target="_blank" rel="noopener">
             <img src="https://www.csmarin.com/wp-content/uploads/2026/07/2e829f0c8f9b320a47abad92cf59bc56.png" alt="クリエイティブスタジオ眞凛" class="csmarin-gmo-logo-img">
           </a>
