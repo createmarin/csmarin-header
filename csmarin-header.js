@@ -43,7 +43,7 @@ class CsmarinHeader extends HTMLElement {
           top: 0;
           right: 0;
           height: 48px;
-          width: 260px;
+          width: 460px; /* テロップ追加に伴い背面幅を拡張 */
           background-color: #00bcd4;
           border-bottom-left-radius: 28px;
           z-index: 1;
@@ -58,7 +58,7 @@ class CsmarinHeader extends HTMLElement {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 0 16px 0 20px;
+          padding: 0 16px 0 16px;
           border-bottom-left-radius: 24px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
@@ -75,6 +75,7 @@ class CsmarinHeader extends HTMLElement {
           height: 24px;
           border-radius: 4px;
           cursor: pointer;
+          flex-shrink: 0;
           transition: background-color 0.2s;
         }
 
@@ -86,6 +87,43 @@ class CsmarinHeader extends HTMLElement {
           width: 18px;
           height: 18px;
           fill: #00bcd4;
+        }
+
+        /* --- 流れるテキスト（テロップ）エリア --- */
+        .csmarin-ticker-container {
+          width: 180px; /* 流れる文字を見せる表示幅（お好みで調整可） */
+          height: 24px;
+          overflow: hidden;
+          position: relative;
+          display: flex;
+          align-items: center;
+          background-color: #f5f5f5;
+          border-radius: 12px;
+          padding: 0 8px;
+          box-sizing: border-box;
+        }
+
+        .csmarin-ticker-text {
+          display: inline-block;
+          white-space: nowrap;
+          font-size: 11px;
+          font-weight: 500;
+          color: #333333;
+          padding-left: 100%; /* 初期位置：右端の外側 */
+          animation: csmarin-scroll-text 15s linear infinite; /* 速度は15sで調整 */
+        }
+
+        .csmarin-ticker-container:hover .csmarin-ticker-text {
+          animation-play-state: paused; /* ホバーで一時停止 */
+        }
+
+        @keyframes csmarin-scroll-text {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
         }
 
         /* --- ドロップダウンパネル（にゅっアニメーション仕様） --- */
@@ -102,9 +140,9 @@ class CsmarinHeader extends HTMLElement {
           z-index: 100000;
           box-sizing: border-box;
           text-align: left;
-          overflow: hidden; /* 水色図形のはみ出しをカット */
+          overflow: hidden;
 
-          /* 初期状態（隠れている時） */
+          /* 初期状態 */
           opacity: 0;
           visibility: hidden;
           transform: translateY(-20px) scaleY(0.85);
@@ -114,7 +152,6 @@ class CsmarinHeader extends HTMLElement {
                       visibility 0.35s;
         }
 
-        /* 開いた状態（にゅっと出てきた時） */
         .csmarin-gmo-dropdown.is-open {
           opacity: 1;
           visibility: visible;
@@ -137,7 +174,7 @@ class CsmarinHeader extends HTMLElement {
 
         .csmarin-dropdown-content {
           position: relative;
-          z-index: 1; /* 水色アクセントの上にコンテンツを表示 */
+          z-index: 1;
         }
 
         .csmarin-menu-section {
@@ -229,12 +266,23 @@ class CsmarinHeader extends HTMLElement {
           display: flex;
           align-items: center;
           text-decoration: none;
+          flex-shrink: 0;
         }
 
         .csmarin-gmo-logo-img {
           height: 22px;
           width: auto;
           display: block;
+        }
+
+        /* モバイル対応（画面幅が狭いときはテロップを隠してカプセル幅を詰める） */
+        @media (max-width: 480px) {
+          .csmarin-ticker-container {
+            display: none;
+          }
+          .csmarin-cyan-accent {
+            width: 260px;
+          }
         }
       </style>
 
@@ -248,9 +296,13 @@ class CsmarinHeader extends HTMLElement {
             </svg>
           </button>
 
+          <!-- 流れるテキストエリア -->
+          <div class="csmarin-ticker-container">
+            <div class="csmarin-ticker-text">WOW! 眞凛、全力創作中!</div>
+          </div>
+
           <!-- ドロップダウンメニュー -->
           <div class="csmarin-gmo-dropdown" id="csmarinDropdown">
-            <!-- メニュー内の右上水色図形 -->
             <div class="csmarin-menu-cyan-shape"></div>
 
             <div class="csmarin-dropdown-content">
