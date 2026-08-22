@@ -88,25 +88,56 @@ class CsmarinHeader extends HTMLElement {
           fill: #00bcd4;
         }
 
-        /* ドロップダウンパネル */
+        /* --- ドロップダウンパネル（にゅっアニメーション仕様） --- */
         .csmarin-gmo-dropdown {
-          display: none;
           position: absolute;
-          top: 48px;
+          top: 44px;
           right: 10px;
           width: 280px;
           background-color: #ffffff;
           border: 1px solid #e0e0e0;
-          border-radius: 8px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-          padding: 15px;
+          border-radius: 12px;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+          padding: 16px;
           z-index: 100000;
           box-sizing: border-box;
           text-align: left;
+          overflow: hidden; /* 水色図形のはみ出しをカット */
+
+          /* 初期状態（隠れている時） */
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-20px) scaleY(0.85);
+          transform-origin: top right;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                      opacity 0.25s ease, 
+                      visibility 0.35s;
         }
 
+        /* 開いた状態（にゅっと出てきた時） */
         .csmarin-gmo-dropdown.is-open {
-          display: block;
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0) scaleY(1);
+        }
+
+        /* メニュー内の水色アクセント図形（右上） */
+        .csmarin-menu-cyan-shape {
+          position: absolute;
+          top: -15px;
+          right: -20px;
+          width: 120px;
+          height: 50px;
+          background-color: #00bcd4;
+          border-bottom-left-radius: 50px;
+          opacity: 0.85;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .csmarin-dropdown-content {
+          position: relative;
+          z-index: 1; /* 水色アクセントの上にコンテンツを表示 */
         }
 
         .csmarin-menu-section {
@@ -134,13 +165,13 @@ class CsmarinHeader extends HTMLElement {
           font-size: 13px;
           color: #333333;
           text-decoration: none;
-          padding: 4px 6px;
+          padding: 5px 8px;
           border-radius: 4px;
-          transition: background-color 0.2s;
+          transition: background-color 0.2s, color 0.2s;
         }
 
         .csmarin-menu-link:hover {
-          background-color: #f5f5f5;
+          background-color: rgba(0, 188, 212, 0.08);
           color: #00bcd4;
         }
 
@@ -217,31 +248,38 @@ class CsmarinHeader extends HTMLElement {
             </svg>
           </button>
 
+          <!-- ドロップダウンメニュー -->
           <div class="csmarin-gmo-dropdown" id="csmarinDropdown">
-            <div class="csmarin-menu-section">
-              <div class="csmarin-menu-title">メディア</div>
-              <a href="https://www.csmarin.shop" class="csmarin-menu-link" target="_blank" rel="noopener">×ブログ</a>
-              <a href="https://www.youtube.com/@csmarin_kosiki" class="csmarin-menu-link" target="_blank" rel="noopener">公式YouTube</a>
-              <a href="https://x.com/csmarin_kosiki" class="csmarin-menu-link" target="_blank" rel="noopener">公式Twitter</a>
-              <a href="https://www.youtube.com/channel/UCrN8T2picalcO4oajrPcUkg" class="csmarin-menu-link" target="_blank" rel="noopener">眞凛CREATECHANNEL</a>
-            </div>
+            <!-- メニュー内の右上水色図形 -->
+            <div class="csmarin-menu-cyan-shape"></div>
 
-            <div class="csmarin-menu-section">
-              <div class="csmarin-menu-title">ストア</div>
-              <a href="https://csmarin.stores.jp" class="csmarin-menu-link" target="_blank" rel="noopener">×ストア</a>
-            </div>
-
-            <div class="csmarin-menu-section csmarin-id-section">
-              <div class="csmarin-id-header">
-                <img src="http://id.csmarin.com/wp-content/uploads/2026/07/CSM-ID-%E9%80%8F%E9%81%8E%E3%83%AD%E3%82%B4.png" alt="CSM-ID" class="csmarin-id-logo">
+            <div class="csmarin-dropdown-content">
+              <div class="csmarin-menu-section">
+                <div class="csmarin-menu-title">メディア</div>
+                <a href="https://www.csmarin.shop" class="csmarin-menu-link" target="_blank" rel="noopener">×ブログ</a>
+                <a href="https://www.youtube.com/@csmarin_kosiki" class="csmarin-menu-link" target="_blank" rel="noopener">公式YouTube</a>
+                <a href="https://x.com/csmarin_kosiki" class="csmarin-menu-link" target="_blank" rel="noopener">公式Twitter</a>
+                <a href="https://www.youtube.com/channel/UCrN8T2picalcO4oajrPcUkg" class="csmarin-menu-link" target="_blank" rel="noopener">眞凛CREATECHANNEL</a>
               </div>
-              <div class="csmarin-id-buttons">
-                <a href="http://id.csmarin.com/register?subscription_plan=10" class="csmarin-id-btn csmarin-id-btn-register" target="_blank" rel="noopener">会員登録</a>
-                <a href="http://id.csmarin.com/login?subscription_plan=10" class="csmarin-id-btn csmarin-id-btn-login" target="_blank" rel="noopener">ログイン</a>
+
+              <div class="csmarin-menu-section">
+                <div class="csmarin-menu-title">ストア</div>
+                <a href="https://csmarin.stores.jp" class="csmarin-menu-link" target="_blank" rel="noopener">×ストア</a>
+              </div>
+
+              <div class="csmarin-menu-section csmarin-id-section">
+                <div class="csmarin-id-header">
+                  <img src="http://id.csmarin.com/wp-content/uploads/2026/07/CSM-ID-%E9%80%8F%E9%81%8E%E3%83%AD%E3%82%B4.png" alt="CSM-ID" class="csmarin-id-logo">
+                </div>
+                <div class="csmarin-id-buttons">
+                  <a href="http://id.csmarin.com/register?subscription_plan=10" class="csmarin-id-btn csmarin-id-btn-register" target="_blank" rel="noopener">会員登録</a>
+                  <a href="http://id.csmarin.com/login?subscription_plan=10" class="csmarin-id-btn csmarin-id-btn-login" target="_blank" rel="noopener">ログイン</a>
+                </div>
               </div>
             </div>
           </div>
 
+          <!-- ロゴ画像 -->
           <a href="https://csmarin.com" class="csmarin-gmo-logo-link" target="_blank" rel="noopener">
             <img src="https://www.csmarin.com/wp-content/uploads/2026/07/2e829f0c8f9b320a47abad92cf59bc56.png" alt="クリエイティブスタジオ眞凛" class="csmarin-gmo-logo-img">
           </a>
