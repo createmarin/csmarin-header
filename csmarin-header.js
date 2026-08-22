@@ -2,12 +2,22 @@ class CsmarinHeader extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+    
+    // イベントハンドラのバインド（削除できるように保持）
+    this._handleOutsideClick = this._handleOutsideClick.bind(this);
+    this._applyAdminBarOffset = this._applyAdminBarOffset.bind(this);
   }
 
   connectedCallback() {
     this.render();
     this.setupEvents();
     this.adjustForAdminBar();
+  }
+
+  disconnectedCallback() {
+    // クリーンアップ
+    document.removeEventListener('click', this._handleOutsideClick);
+    window.removeEventListener('resize', this._applyAdminBarOffset);
   }
 
   render() {
@@ -17,7 +27,7 @@ class CsmarinHeader extends HTMLElement {
           all: initial;
           display: block !important;
           position: fixed !important;
-          top: 0 !important;
+          top: var(--admin-bar-offset, 0px) !important;
           right: 0 !important;
           left: 0 !important;
           height: 0 !important;
@@ -89,7 +99,7 @@ class CsmarinHeader extends HTMLElement {
           display: block !important;
         }
 
-        /* テロップ枠（強制サイズ & 表示固定） */
+        /* テロップ枠 */
         .csmarin-ticker-container {
           width: 180px !important;
           min-width: 180px !important;
@@ -289,7 +299,7 @@ class CsmarinHeader extends HTMLElement {
         <div class="csmarin-cyan-accent"></div>
 
         <div class="csmarin-capsule-body">
-          <button type="button" class="csmarin-gmo-menu-btn" id="csmarinMenuToggle" title="メニュー">
+          <button type="button" class="csmarin-gmo-menu-btn" id="csmarinMenuToggle" title="メニュー" aria-haspopup="true" aria-expanded="false">
             <svg viewBox="0 0 24 24">
               <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM6 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
             </svg>
@@ -337,39 +347,44 @@ class CsmarinHeader extends HTMLElement {
   }
 
   setupEvents() {
-    const toggleBtn = this.shadowRoot.getElementById('csmarinMenuToggle');
-    const dropdown = this.shadowRoot.getElementById('csmarinDropdown');
+    this._toggleBtn = this.shadowRoot.getElementById('csmarinMenuToggle');
+    this._dropdown = this.shadowRoot.getElementById('csmarinDropdown');
 
-    if (toggleBtn && dropdown) {
-      toggleBtn.addEventListener('click', (e) => {
+    if (this._toggleBtn && this._dropdown) {
+      this._toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        dropdown.classList.toggle('is-open');
+        const isOpen = this._dropdown.classList.toggle('is-open');
+        this._toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
 
-      document.addEventListener('click', (e) => {
-        if (!e.composedPath().includes(dropdown) && !e.composedPath().includes(toggleBtn)) {
-          dropdown.classList.remove('is-open');
-        }
-      });
+      document.addEventListener('click', this._handleOutsideClick);
     }
   }
 
+  _handleOutsideClick(e) {
+    if (!this._dropdown || !this._toggleBtn) return;
+    const path = e.composedPath();
+    if (!path.includes(this._dropdown) && !path.includes(this._toggleBtn)) {
+      this._dropdown.classList.remove('is-open');
+      this._toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  _applyAdminBarOffset() {
+    const isAdminBar = document.body.classList.contains('admin-bar');
+    if (!isAdminBar) {
+      this.style.setProperty('--admin-bar-offset', '0px');
+      return;
+    }
+
+    const isMobile = window.innerWidth <= 782;
+    const adminBarHeight = isMobile ? 46 : 32;
+    this.style.setProperty('--admin-bar-offset', `${adminBarHeight}px`);
+  }
+
   adjustForAdminBar() {
-    const applyOffset = () => {
-      const isAdminBar = document.body.classList.contains('admin-bar');
-      if (!isAdminBar) {
-        this.style.top = '0px';
-        return;
-      }
-
-      const isMobile = window.innerWidth <= 782;
-      const adminBarHeight = isMobile ? 46 : 32;
-
-      this.style.top = `${adminBarHeight}px`;
-    };
-
-    applyOffset();
-    window.addEventListener('resize', applyOffset);
+    this._applyAdminBarOffset();
+    window.addEventListener('resize', this._applyAdminBarOffset);
   }
 }
 
