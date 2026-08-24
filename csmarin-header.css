@@ -26,17 +26,22 @@
   pointer-events: auto !important;
 }
 
+/* 水色アクセント（幅を広げてテロップを内包） */
 .csmarin-cyan-accent {
   position: absolute !important;
   top: 0 !important;
   right: 0 !important;
   height: 48px !important;
-  width: 460px !important;
+  width: 520px !important;
   background-color: #00bcd4 !important;
   border-bottom-left-radius: 28px !important;
   z-index: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  padding-left: 18px !important;
 }
 
+/* 白カプセル本体 */
 .csmarin-capsule-body {
   position: relative !important;
   z-index: 2 !important;
@@ -76,16 +81,16 @@
   display: block !important;
 }
 
-/* テロップ枠 */
+/* 水色エリア内のテロップ枠 */
 .csmarin-ticker-container {
-  width: 200px !important;
-  min-width: 200px !important;
-  max-width: 200px !important;
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
   height: 24px !important;
   overflow: hidden !important;
   position: relative !important;
-  background-color: #f0f0f0 !important;
-  border: 1px solid #e0e0e0 !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   border-radius: 12px !important;
   flex-shrink: 0 !important;
 }
@@ -98,7 +103,7 @@
   font-size: 11px !important;
   line-height: 22px !important;
   font-weight: 500 !important;
-  color: #333333 !important;
+  color: #ffffff !important;
   display: block !important;
   animation: csmarin-scroll-text 14s linear infinite !important;
 }
@@ -109,7 +114,7 @@
 
 @keyframes csmarin-scroll-text {
   0% {
-    transform: translateX(200px);
+    transform: translateX(220px);
   }
   100% {
     transform: translateX(-100%);
@@ -259,7 +264,7 @@
   display: block !important;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
   .csmarin-ticker-container {
     display: none !important;
   }
