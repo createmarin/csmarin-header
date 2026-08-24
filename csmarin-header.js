@@ -22,7 +22,11 @@ class CsmarinHeader extends HTMLElement {
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/createmarin/csmarin-header@main/csmarin-header.css">
 
       <div class="csmarin-header-wrapper">
-        <div class="csmarin-cyan-accent"></div>
+        <div class="csmarin-cyan-accent">
+          <div class="csmarin-ticker-container">
+            <div class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</div>
+          </div>
+        </div>
 
         <div class="csmarin-capsule-body">
           <button type="button" class="csmarin-gmo-menu-btn" id="csmarinMenuToggle" title="メニュー" aria-haspopup="true" aria-expanded="false">
@@ -30,10 +34,6 @@ class CsmarinHeader extends HTMLElement {
               <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM6 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
             </svg>
           </button>
-
-          <div class="csmarin-ticker-container">
-            <div class="csmarin-ticker-text">【お知らせ】クリエイティブスタジオ眞凛 公式ポータルサイト更新中！</div>
-          </div>
 
           <div class="csmarin-gmo-dropdown" id="csmarinDropdown">
             <div class="csmarin-menu-cyan-shape"></div>
