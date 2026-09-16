@@ -17,7 +17,7 @@ class CsmarinHeader extends HTMLElement {
           all: initial;
           display: block !important;
           position: fixed !important;
-          top: 0 !important;
+          top: var(--admin-bar-offset, 0px) !important;
           right: 0 !important;
           left: 0 !important;
           height: 0 !important;
@@ -47,7 +47,7 @@ class CsmarinHeader extends HTMLElement {
           top: 0 !important;
           right: 0 !important;
           height: 48px !important;
-          width: 520px !important;
+          width: 580px !important;
           background-color: #00bcd4 !important;
           border-bottom-left-radius: 28px !important;
           z-index: 1 !important;
@@ -136,6 +136,40 @@ class CsmarinHeader extends HTMLElement {
           100% {
             transform: translateX(-100%);
           }
+        }
+
+        /* ロゴ並列エリア */
+        .csmarin-logos-group {
+          display: flex !important;
+          align-items: center !important;
+          gap: 8px !important;
+        }
+
+        .csmarin-gmo-logo-link {
+          display: flex !important;
+          align-items: center !important;
+          text-decoration: none !important;
+          flex-shrink: 0 !important;
+        }
+
+        .csmarin-csmgroup-logo-img {
+          height: 20px !important;
+          width: auto !important;
+          display: block !important;
+        }
+
+        .csmarin-studio-logo-img {
+          height: 20px !important;
+          width: auto !important;
+          display: block !important;
+        }
+
+        /* ロゴ間の仕切り線 */
+        .csmarin-logo-divider {
+          width: 1px !important;
+          height: 14px !important;
+          background-color: #d0d0d0 !important;
+          flex-shrink: 0 !important;
         }
 
         /* ドロップダウンメニュー */
@@ -268,22 +302,21 @@ class CsmarinHeader extends HTMLElement {
           opacity: 0.85 !important;
         }
 
-        .csmarin-gmo-logo-link {
-          display: flex !important;
-          align-items: center !important;
-          text-decoration: none !important;
-          flex-shrink: 0 !important;
-        }
-
-        .csmarin-gmo-logo-img {
-          height: 22px !important;
-          width: auto !important;
-          display: block !important;
-        }
-
         /* スマホ対応 */
-        @media (max-width: 580px) {
+        @media (max-width: 680px) {
           .csmarin-ticker-container {
+            display: none !important;
+          }
+          .csmarin-cyan-accent {
+            width: 380px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .csmarin-studio-logo-img {
+            display: none !important;
+          }
+          .csmarin-logo-divider {
             display: none !important;
           }
           .csmarin-cyan-accent {
@@ -302,7 +335,7 @@ class CsmarinHeader extends HTMLElement {
           </div>
         </div>
 
-        <!-- 白カプセル（9ドットボタン + ロゴ） -->
+        <!-- 白カプセル（9ドットボタン + 併設ロゴ） -->
         <div class="csmarin-capsule-body">
           <button type="button" class="csmarin-gmo-menu-btn" id="csmarinMenuToggle" title="メニュー">
             <svg viewBox="0 0 24 24">
@@ -310,9 +343,19 @@ class CsmarinHeader extends HTMLElement {
             </svg>
           </button>
 
-          <a href="https://csmarin.com" class="csmarin-gmo-logo-link" target="_blank" rel="noopener">
-            <img src="https://www.csmarin.com/wp-content/uploads/2026/07/2e829f0c8f9b320a47abad92cf59bc56.png" alt="クリエイティブスタジオ眞凛" class="csmarin-gmo-logo-img">
-          </a>
+          <div class="csmarin-logos-group">
+            <!-- CSMGROUP ロゴ -->
+            <a href="https://csmarin.com" class="csmarin-gmo-logo-link" target="_blank" rel="noopener">
+              <img src="https://res.cloudinary.com/oq5ci33v/image/upload/f_auto,q_auto/CSMGROUP%E3%83%AD%E3%82%B3%E3%82%99" alt="CSMGROUP" class="csmarin-csmgroup-logo-img">
+            </a>
+
+            <div class="csmarin-logo-divider"></div>
+
+            <!-- クリエイティブスタジオ眞凛 ロゴ -->
+            <a href="https://csmarin.com" class="csmarin-gmo-logo-link" target="_blank" rel="noopener">
+              <img src="https://www.csmarin.com/wp-content/uploads/2026/07/2e829f0c8f9b320a47abad92cf59bc56.png" alt="クリエイティブスタジオ眞凛" class="csmarin-studio-logo-img">
+            </a>
+          </div>
         </div>
 
         <!-- ドロップダウンメニュー -->
