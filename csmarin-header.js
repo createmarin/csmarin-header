@@ -347,7 +347,7 @@ class CsmarinHeader extends HTMLElement {
 
             <!-- クリエイティブスタジオ眞凛 ロゴ -->
             <a href="https://csmarin.com" class="csmarin-gmo-logo-link" target="_blank" rel="noopener">
-              <img src="https://www.csmarin.com/wp-content/uploads/2026/07/2e829f0c8f9b320a47abad92cf59bc56.png" alt="クリエイティブスタジオ眞凛" class="csmarin-studio-logo-img">
+              <img src="https://res.cloudinary.com/oq5ci33v/image/upload/v1789803772/CS%E7%9C%9E%E5%87%9B%E6%96%B0%E3%83%AD%E3%82%B3%E3%82%99%E5%92%8C%E6%96%87%E9%9D%92%E8%B5%A4%E9%80%8F%E9%81%8E.png" alt="クリエイティブスタジオ眞凛" class="csmarin-studio-logo-img">
             </a>
           </div>
         </div>
@@ -372,7 +372,7 @@ class CsmarinHeader extends HTMLElement {
 
             <div class="csmarin-menu-section csmarin-id-section">
               <div class="csmarin-id-header">
-                <img src="http://id.csmarin.com/wp-content/uploads/2026/07/CSM-ID-%E9%80%8F%E9%81%8E%E3%83%AD%E3%82%B4.png" alt="CSM-ID" class="csmarin-id-logo">
+                <img src="https://res.cloudinary.com/oq5ci33v/image/upload/v1789803771/CSM-ID_%E9%80%8F%E9%81%8E%E3%83%AD%E3%82%B3%E3%82%99.png" alt="CSM-ID" class="csmarin-id-logo">
               </div>
               <div class="csmarin-id-buttons">
                 <a href="http://id.csmarin.com/register?subscription_plan=10" class="csmarin-id-btn csmarin-id-btn-register" target="_blank" rel="noopener">会員登録</a>
