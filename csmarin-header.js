@@ -7,7 +7,36 @@ class CsmarinHeader extends HTMLElement {
   connectedCallback() {
     this.render();
     this.setupEvents();
-    this.adjustForAdminBar();
+    this.adjustForAdminBar() {
+  const applyOffset = () => {
+    const isAdminBar = document.body.classList.contains('admin-bar');
+    let offset = 0;
+
+    if (isAdminBar) {
+      const isMobile = window.innerWidth <= 782;
+      offset = isMobile ? 46 : 32;
+    }
+
+    // 共通ヘッダー自体の位置調整
+    this.style.setProperty('--admin-bar-offset', `${offset}px`);
+
+    // 既存サイトのbodyおよびfixedヘッダーを共通ヘッダー分(42px)押し下げる
+    const totalTopMargin = offset + 42;
+    document.body.style.paddingTop = `${totalTopMargin}px`;
+
+    // 固定表示されている主要なヘッダー要素を探して位置補正
+    const siteHeaders = document.querySelectorAll('header, .site-header, #masthead, .nav-container');
+    siteHeaders.forEach(header => {
+      const style = window.getComputedStyle(header);
+      if (style.position === 'fixed' || style.position === 'sticky') {
+        header.style.top = `${totalTopMargin}px`;
+      }
+    });
+  };
+
+  applyOffset();
+  window.addEventListener('resize', applyOffset);
+}
   }
 
   render() {
