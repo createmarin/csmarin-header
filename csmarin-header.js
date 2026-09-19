@@ -20,7 +20,8 @@ class CsmarinHeader extends HTMLElement {
           top: var(--admin-bar-offset, 0px) !important;
           right: 0 !important;
           left: 0 !important;
-          height: 0 !important;
+          width: 100% !important;
+          height: 42px !important;
           z-index: 999999 !important;
           box-sizing: border-box !important;
           transition: top 0.2s ease !important;
@@ -32,28 +33,39 @@ class CsmarinHeader extends HTMLElement {
         }
 
         .csmarin-header-wrapper {
-          position: absolute !important;
-          top: 0 !important;
-          right: 0 !important;
+          width: 100% !important;
+          height: 42px !important;
+          background-color: #00bcd4 !important; /* 全幅の水色背景 */
           display: flex !important;
           align-items: center !important;
-          justify-content: flex-end !important;
+          justify-content: space-between !important;
+          padding-left: 16px !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
           pointer-events: auto !important;
+          position: relative !important;
         }
 
-        /* 水色背景アクセント（左側テロップ領域） */
-        .csmarin-cyan-accent {
-          position: absolute !important;
-          top: 0 !important;
-          right: 0 !important;
-          height: 48px !important;
-          width: 580px !important;
-          background-color: #00bcd4 !important;
-          border-bottom-left-radius: 28px !important;
-          z-index: 1 !important;
+        /* 左側：テキストエリア（スクロールなし全文表示） */
+        .csmarin-notice-area {
           display: flex !important;
           align-items: center !important;
-          padding-left: 18px !important;
+          overflow: hidden !important;
+          padding-right: 12px !important;
+        }
+
+        .csmarin-notice-text {
+          font-size: 12px !important;
+          font-weight: 500 !important;
+          color: #ffffff !important;
+          text-decoration: none !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          transition: opacity 0.2s !important;
+        }
+
+        .csmarin-notice-text:hover {
+          opacity: 0.85 !important;
         }
 
         /* 右側：白カプセル本体（ロゴ・9ドットボタン） */
@@ -65,9 +77,9 @@ class CsmarinHeader extends HTMLElement {
           display: flex !important;
           align-items: center !important;
           gap: 10px !important;
-          padding: 0 14px !important;
-          border-bottom-left-radius: 24px !important;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+          padding: 0 16px !important;
+          border-bottom-left-radius: 20px !important;
+          flex-shrink: 0 !important;
         }
 
         /* 9点ドットメニューボタン */
@@ -95,47 +107,6 @@ class CsmarinHeader extends HTMLElement {
           height: 18px !important;
           fill: #00bcd4 !important;
           display: block !important;
-        }
-
-        /* 水色エリア内の流れるテロップ枠 */
-        .csmarin-ticker-container {
-          width: 220px !important;
-          min-width: 220px !important;
-          max-width: 220px !important;
-          height: 24px !important;
-          overflow: hidden !important;
-          position: relative !important;
-          background-color: rgba(255, 255, 255, 0.2) !important;
-          border: 1px solid rgba(255, 255, 255, 0.4) !important;
-          border-radius: 12px !important;
-          flex-shrink: 0 !important;
-        }
-
-        .csmarin-ticker-text {
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          white-space: nowrap !important;
-          font-size: 11px !important;
-          line-height: 22px !important;
-          font-weight: 500 !important;
-          color: #ffffff !important;
-          display: block !important;
-          text-decoration: none !important;
-          animation: csmarin-scroll-text 14s linear infinite !important;
-        }
-
-        .csmarin-ticker-container:hover .csmarin-ticker-text {
-          animation-play-state: paused !important;
-        }
-
-        @keyframes csmarin-scroll-text {
-          0% {
-            transform: translateX(220px);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
         }
 
         /* ロゴ並列エリア */
@@ -175,7 +146,7 @@ class CsmarinHeader extends HTMLElement {
         /* ドロップダウンメニュー */
         .csmarin-gmo-dropdown {
           position: absolute !important;
-          top: 48px !important;
+          top: 46px !important;
           right: 10px !important;
           width: 280px !important;
           background-color: #ffffff !important;
@@ -188,11 +159,9 @@ class CsmarinHeader extends HTMLElement {
           overflow: hidden !important;
           opacity: 0 !important;
           visibility: hidden !important;
-          transform: translateY(-20px) scaleY(0.85) !important;
+          transform: translateY(-15px) scaleY(0.9) !important;
           transform-origin: top right !important;
-          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                      opacity 0.25s ease, 
-                      visibility 0.35s !important;
+          transition: transform 0.25s ease, opacity 0.2s ease, visibility 0.25s !important;
         }
 
         .csmarin-gmo-dropdown.is-open {
@@ -303,39 +272,35 @@ class CsmarinHeader extends HTMLElement {
         }
 
         /* スマホ対応 */
-        @media (max-width: 680px) {
-          .csmarin-ticker-container {
-            display: none !important;
-          }
-          .csmarin-cyan-accent {
-            width: 380px !important;
-          }
-        }
-
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
           .csmarin-studio-logo-img {
             display: none !important;
           }
           .csmarin-logo-divider {
             display: none !important;
           }
-          .csmarin-cyan-accent {
-            width: 260px !important;
+        }
+
+        @media (max-width: 480px) {
+          .csmarin-notice-area {
+            display: none !important;
+          }
+          .csmarin-header-wrapper {
+            justify-content: flex-end !important;
+            padding-left: 0 !important;
           }
         }
       </style>
 
       <div class="csmarin-header-wrapper">
-        <!-- 背景アクセント＆流れる文字 -->
-        <div class="csmarin-cyan-accent">
-          <div class="csmarin-ticker-container">
-            <a href="http://id.csmarin.com/register?subscription_plan=10" class="csmarin-ticker-text" target="_blank" rel="noopener">
-              CSM-ID会員募集中！ 無料登録で全サービスを快適に利用できます
-            </a>
-          </div>
+        <!-- 左側：全文表示テキスト -->
+        <div class="csmarin-notice-area">
+          <a href="http://id.csmarin.com/register?subscription_plan=10" class="csmarin-notice-text" target="_blank" rel="noopener">
+            CSM-ID会員募集中！ 無料登録で全サービスを快適に利用できます
+          </a>
         </div>
 
-        <!-- 白カプセル（9ドットボタン + 併設ロゴ） -->
+        <!-- 右側：白カプセル（9ドットボタン + 併設ロゴ） -->
         <div class="csmarin-capsule-body">
           <button type="button" class="csmarin-gmo-menu-btn" id="csmarinMenuToggle" title="メニュー">
             <svg viewBox="0 0 24 24">
